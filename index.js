@@ -100,9 +100,9 @@ function renderWeatherInfo(weatherInfo) {
     const humidity = document.querySelector("[data-humidity]");
     const cloudiness = document.querySelector("[data-cloudiness]");
 
-    console.log(weatherInfo);
-
+    if(weatherInfo?.name!==undefined){
     //fetch values from weatherINfo object and put it UI elements
+
     cityName.innerText = weatherInfo?.name;
     countryIcon.src = `https://flagcdn.com/144x108/${weatherInfo?.sys?.country.toLowerCase()}.png`;
     desc.innerText = weatherInfo?.weather?.[0]?.description;
@@ -111,8 +111,12 @@ function renderWeatherInfo(weatherInfo) {
     windspeed.innerText = `${weatherInfo?.wind?.speed} m/s`;
     humidity.innerText = `${weatherInfo?.main?.humidity}%`;
     cloudiness.innerText = `${weatherInfo?.clouds?.all}%`;
-
-
+}
+else
+{
+    // generated error due to which catch will work
+    desc.innerText = ErrorFetchingDetails;
+}
 }
 
 function getLocation() {
